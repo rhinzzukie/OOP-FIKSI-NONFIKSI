@@ -1,0 +1,22 @@
+//Asbtract//
+public abstract class Buku {
+    
+    //Encapsulation: Field dibuat private
+    private String judul; // field  → nyimpen DATA
+    private String isbn;
+
+    //Constractor 
+    public Buku(String judul, String isbn){
+        this.judul=judul;
+        this.isbn= isbn;
+    }
+    // Getter untuk akses data private
+    public String getJudul(){  
+        return judul;
+    }
+    public String getIsbn(){
+        return isbn;
+    }
+    // Metode abstrak yang wajib diimplementasi anak kelas
+    public abstract void displayInfo();
+}
