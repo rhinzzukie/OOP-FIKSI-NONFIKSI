@@ -1,0 +1,41 @@
+import java.util.ArrayList; // import library ArrayList agar bisa dipakai di class ini
+
+public class Anggota {
+    // === FIELD ===
+    // private = encapsulation, data tidak bisa diakses langsung dari luar class
+    private String nama;
+    private String noKtp;
+    private ArrayList<Buku> bukuDipinjam; //<-- list buku yang dipinjam anggota ini
+                                          // ArrayList karena jumlahnya tidak pasti
+    //Constractor
+    public Anggota(String nama, String noKtp){
+        this.nama=nama;
+        this.noKtp=noKtp;
+        this.bukuDipinjam= new ArrayList<>();
+    }
+    //GETTER
+    public String getNama(){
+        return nama;
+    }
+    public String noKtp(){
+        return noKtp;
+    }
+    public void pinjamBuku(Buku buku){
+        bukuDipinjam.add(buku);
+    }
+    //Mehod DisplayInfo
+    public void displayInfo(){
+        System.out.println("Nama:"+ nama + " KTP: "+ noKtp);
+        System.out.println("buku yang dipinjam");
+        //for-each = loop semua isi list bukuDipinjam satu per satu
+        for (Buku b : bukuDipinjam){
+            
+            b.displayInfo(); //<===/ POLYMORPHISM!(bisa Diplih Opsi fiksi atau non fiksi) 
+                             // kalau b = BukuFiksi    → keluar "[FIKSI] ..."
+                             // kalau b = BukuNonFiksi → keluar "[NON-FIKSI] ..."
+                             // satu perintah, hasil beda tergantung objectnya
+        }
+    }
+
+
+}
