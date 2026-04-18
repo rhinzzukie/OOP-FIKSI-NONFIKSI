@@ -1,0 +1,103 @@
+import java.util.Scanner; // import library untuk menerima input dari user
+
+public class Main {
+    public static void main(String[] args) {
+
+        // === IDENTITAS MAHASISWA ===
+        System.out.println("================================");
+        System.out.println("SELAMAT DATANG DI TOKO BU SARI!!");
+        System.out.println("SILAHKAN MAU PINJAM APA ");
+        System.out.println("NANTI INGAT DIKEMBALIKAN YA");
+        System.out.println("================================\n");
+
+        // === BUAT OBJECT PERPUSTAKAAN ===
+        // ini "otak" programnya, semua data disimpan di sini
+        Perpustakaan perpus = new Perpustakaan();
+
+        // === BUAT SCANNER ===
+        // scanner = alat untuk menerima input dari keyboard
+        Scanner sc = new Scanner(System.in);
+
+        // === INPUT BUKU ===
+        System.out.print("Masukkan jumlah buku: ");
+        int jumlahBuku = sc.nextInt();
+        sc.nextLine(); // membersihkan sisa enter
+
+        for (int i = 1; i <= jumlahBuku; i++) {
+            System.out.println("\n-- Buku ke-" + i + " --");
+
+            System.out.print("Jenis (1=Fiksi, 2=NonFiksi): ");
+            int jenis = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Judul : ");
+            String judul = sc.nextLine();
+
+            System.out.print("ISBN  : ");
+            String isbn = sc.nextLine();
+
+            if (jenis == 1) {
+                System.out.print("Genre : ");
+                String genre = sc.nextLine();
+                perpus.tambahBuku(new BukuFiksi(judul, isbn, genre));
+            } else {
+                System.out.print("Topik : ");
+                String topik = sc.nextLine();
+                perpus.tambahBuku(new BukuNonFiksi(judul, isbn, topik));
+            }
+        }
+
+        // === INPUT ANGGOTA ===
+        System.out.print("\nMasukkan jumlah anggota: ");
+        int jumlahAnggota = sc.nextInt();
+        sc.nextLine();
+
+        for (int i = 1; i <= jumlahAnggota; i++) {
+            System.out.println("\n-- Anggota ke-" + i + " --");
+
+            System.out.print("Nama : ");
+            String nama = sc.nextLine();
+
+            System.out.print("KTP  : ");
+            String ktp = sc.nextLine();
+
+            Anggota anggota = new Anggota(nama, ktp);
+
+            // === PINJAM BUKU ===
+            // anggota bisa pinjam lebih dari 1 buku
+            String lagi = "y";
+            while (lagi.equalsIgnoreCase("y")) {
+
+                perpus.tampilSemuaBuku(); // tampilkan daftar buku dulu
+
+                System.out.print("Masukkan ISBN buku yang dipinjam: ");
+                String isbn = sc.nextLine();
+
+                // TANTANGAN! cari buku berdasarkan ISBN
+                Buku buku = perpus.cariBuku(isbn);
+
+                if (buku != null) {
+                    // buku ketemu!
+                    anggota.pinjamBuku(buku);
+                    System.out.println("Berhasil meminjam: " + buku.getJudul());
+                } else {
+                    // buku tidak ketemu
+                    System.out.println("Buku dengan ISBN tersebut tidak ditemukan!");
+                }
+
+                System.out.print("Pinjam buku lagi? (y/n): ");
+                lagi = sc.nextLine();
+            }
+
+            perpus.tambahAnggota(anggota);
+        }
+
+        // === TAMPILKAN SEMUA DATA ===
+        System.out.println("\n");
+        perpus.tampilSemuaBuku();
+        System.out.println();
+        perpus.tampilSemuaAnggota();
+
+        sc.close(); // tutup scanner setelah selesai dipakai
+    }
+}
