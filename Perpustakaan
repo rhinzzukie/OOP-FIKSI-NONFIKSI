@@ -1,0 +1,54 @@
+import java.util.ArrayList;// import library ArrayList
+
+public class Perpustakaan {
+    // private = encapsulation
+    private ArrayList<Buku> daftarBuku;
+    private ArrayList<Anggota> daftarAnggota;
+
+    // === CONSTRUCTOR ===
+    // saat object Perpustakaan dibuat, langsung siapkan 2 keranjang kosong
+    public  Perpustakaan(){
+        this.daftarBuku = new ArrayList<>();
+        this.daftarAnggota= new ArrayList<>();
+    }
+    // === METHOD tambahBuku ===
+    // untuk menambahkan buku baru ke koleksi perpustakaan
+    public void tambahBuku(Buku buku){
+        daftarBuku.add(buku);
+
+    }
+    public void tambahAnggota(Anggota anggota){
+        daftarAnggota.add(anggota);
+
+    }
+    // === METHOD cariBuku ===
+    // TANTANGAN! mencari buku berdasarkan ISBN
+    // return Buku  = kalau ketemu, kembalikan objectnya
+    // return null  = kalau tidak ketemu, kembalikan null
+    public Buku cariBuku(String isbn) {
+        for (Buku b : daftarBuku) {          // cek satu per satu buku di daftar
+            if (b.getIsbn().equals(isbn)) {  // kalau ISBN cocok...
+                return b;                    // kembalikan buku itu!
+            }
+        }
+        return null; // tidak ketemu
+    }
+    // === METHOD tampilSemuaBuku ===
+    // menampilkan semua buku yang ada di perpustakaan
+    public void tampilSemuaBuku() {
+        System.out.println("=== DAFTAR BUKU ===");
+        for (Buku b : daftarBuku) {
+            b.displayInfo(); // Polymorphism bekerja di sini!
+        }
+    }
+
+    // === METHOD tampilSemuaAnggota ===
+    // menampilkan semua anggota beserta buku yang mereka pinjam
+    public void tampilSemuaAnggota() {
+        System.out.println("=== DAFTAR ANGGOTA ===");
+        for (Anggota a : daftarAnggota) {
+            a.displayInfo();
+        }
+    }
+
+}
