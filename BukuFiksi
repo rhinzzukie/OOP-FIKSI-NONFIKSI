@@ -1,0 +1,23 @@
+// "extends" menandakan Inheritance (Pewarisan). 
+//Berarti Bukufiksi adalah anak dari class Buku dan mewarisi semua sifatnya.
+public class BukuFiksi extends Buku {
+    //Encapsulation (keamanan data)
+    private String genre;
+
+    //constractor Fungsi yang dipanggil saat membuat objek baru
+    public BukuFiksi(String judul, String isbn, String genre){
+
+        //"super" digunakan untuk memanggil constructor milik class induk (Buku).
+        super(judul, isbn);
+        this.genre = genre;
+    }
+    
+    public void displayInfo(){
+
+        // bersifat private, jadi harus diakses lewat fungsi "getter".
+        System.out.println("[FIKSI] " + getJudul() + " [ISBN] " + getIsbn() + " [GENRE] " + genre);
+    }
+
+
+}
+
