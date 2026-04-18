@@ -1,0 +1,16 @@
+// "extends" menandakan Inheritance (Pewarisan). 
+//Berarti Bukufiksi adalah anak dari class Buku dan mewarisi semua sifatnya.
+public class BukuNonFiksi extends Buku {
+    private String topik;
+
+    public BukuNonFiksi(String judul, String isbn, String topik){
+        super(judul,isbn);
+        this.topik=topik;
+    }
+    
+    public void displayInfo() {
+        System.out.println("[NON-FIKSI] " + getJudul() + " [ISBN] " + getIsbn() + " [TOPIK] " + topik);
+    }
+
+    
+}
